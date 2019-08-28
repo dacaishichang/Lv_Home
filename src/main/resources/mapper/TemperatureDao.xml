@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.nuc.dao.TemperatureDao">
+
+	<select id="count" resultType="int">
+		select count(*) from hometemperaturehistory t
+		<where>
+			homeId = #{_parameter}
+		</where>
+	</select>
+
+	<!-- 列出所有的列表 -->
+	<select id="select" resultType="HomeTemperatureHistory">
+		<bind name="pageNum" value="(page-1)*limit"></bind>
+		select hometimeId,homeId,temperature,time from hometemperaturehistory t
+		<where>
+			1=1
+			<if test="homeId != null">
+				and t.homeId = #{homeId}
+			</if>
+			<if test="temperature != null">
+				and t.temperature=#{temperature}
+			</if>
+			<if test="time != null">
+				and t.time = #{time}
+			</if>
+		</where>
+		order by hometimeId desc limit #{pageNum},#{limit}
+	</select>
+
+	<!-- 插入操作 -->
+	<insert id="insert">
+        insert into hometemperaturehistory(homeId,temperature,time)
+        values (#{homeId},#{temperature},#{time})
+    </insert>
+
+	<!-- 通过Id来寻找特定单个目标 -->
+	<select id="selectById" resultType="HomeTemperatureHistory">
+        select userId,useraccount,password,username,sex,age from usertable where userId = #{_parameter}
+    </select>
+
+
+	<!-- 更新数据 -->
+	<update id="update">
+		update usertable
+		<set>
+			<if test="useraccount != null">
+				useraccount = #{useraccount},
+			</if>
+			<if test="password != null">
+				password=#{password},
+			</if>
+			<if test="username != null">
+				username = #{username},
+			</if>
+			<if test="sex != null">
+				sex = #{sex},
+			</if>
+			<if test="age != null">
+				age = #{age},
+			</if>
+		</set>
+		where userId=#{userId}
+		<if test="useraccount != null">
+			and not exists(select 1 from(select 1 from usertable where useraccount=#{useraccount} and userId != #{userId})a)
+		</if>
+	</update>
+
+	<!-- 删除数据 -->
+	<delete id="delete">
+        delete from usertable where userId=#{_parameter}
+    </delete>
+</mapper>
+

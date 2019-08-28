@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nuc.dao.DonkeyDao">
+    
+    <!-- 列出所有的列表 -->
+    <select id="select" resultType="Donkey">
+        <bind name="pageNum" value="(page-1)*limit"></bind>
+        select donkeyId, RFIDInfo, homeId,gender,size from donkeytable t
+        <where>
+            <if test="homeId != null">
+                and t.homeId = #{homeId}
+            </if>
+            <if test="size != null">
+                and t.size=#{size}
+            </if>
+            <if test="gender != gender">
+                and t.gender = #{gender}
+            </if>
+        </where>
+        order by homeId limit #{pageNum},#{limit}
+    </select>
+
+    <!--统计-->
+    <select id="count" resultType="int">
+        select count(*) from donkeytable t
+        <where>
+            1=1
+            <if test="homeId != null">
+                and t.homeId = #{homeId}
+            </if>
+            <if test="size != null">
+                and t.size=#{size}
+            </if>
+            <if test="gender != gender">
+                and t.gender = #{gender}
+            </if>
+        </where>
+    </select>
+
+    <!-- 插入操作 -->
+    <insert id="insert">
+        insert into donkeytable(homeId,gender,size)
+        values(#{homeId},#{gender},#{size})
+    </insert>
+
+    <!-- 通过Id来寻找特定单个目标 -->
+    <select id="selectById" resultType="Donkey">
+        select donkeyId,RFIDInfo,homeId,gender,size from donkeytable where donkeyId = #{_parameter}
+    </select>
+    
+    <!-- 更新数据 -->
+    <update id="update">
+        update donkeytable
+        <set>
+            <if test="homeId != null">
+                homeId = #{homeId},
+            </if>
+            <if test="RFIDInfo != null">
+                RFIDInfo = #{RFIDInfo},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="size != null">
+                size = #{size},
+            </if>
+
+        </set>
+        where donkeyId=#{donkeyId}
+    </update>
+    
+    <!-- 删除数据 -->
+    <delete id="deleteById">
+        delete from donkeytable where donkeyId=#{_parameter}
+    </delete>
+    
+    <!-- 通过驴舍id删除驴 -->
+    <delete id="deleteByHomeId">
+        delete from donkeyId where homeId=#{_parameter}
+    </delete>
+</mapper>

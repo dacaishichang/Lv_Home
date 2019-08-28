@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.nuc.dao.HomeDao">
+    <!-- 列出所有的列表 -->
+    <select id="select" resultType="Home">
+        <bind name="pageNum" value="(page-1)*limit"></bind>
+        select t.homeId, t.userId, t.temperature, t.humidity, t.illumination, t.dest1, t.dest2, t.PANID, usertable.useraccount from hometable t,usertable
+        <where>
+                1=1 and t.userId=usertable.userId
+            <if test="userId != null">
+                and t.userId = #{userId}
+            </if>
+            <if test="dest1 != null">
+                and t.dest1=#{dest1}
+            </if>
+            <if test="dest2 != null">
+                and t.dest2 = #{dest2}
+            </if>
+        </where>
+        order by homeId limit #{pageNum},#{limit}
+    </select>
+
+    <!--统计-->
+    <select id="count" resultType="int">
+        select count(*) from hometable t
+        <where>
+            1=1
+            <if test="userId != null">
+                and t.userId = #{userId}
+            </if>
+            <if test="dest1 != null">
+                and t.dest1=#{dest1}
+            </if>
+            <if test="dest2 != null">
+                and t.dest2 = #{dest2}
+            </if>
+        </where>
+    </select>
+
+    <!-- 插入操作 -->
+    <insert id="insert">
+        insert into hometable(userId, temperature, humidity, illumination)
+        values(#{userId},#{temperature},#{humidity},#{illumination})
+    </insert>
+    
+    <!-- 通过Id来寻找特定单个目标 -->
+    <select id="selectById" resultType="Home">
+        select homeId,userId,temperature,humidity,illumination,dest1,dest2,PANID from hometable where homeId = #{_parameter}
+    </select>
+    
+    <!-- 更新数据 -->
+    <update id="update">
+        update hometable
+        <set>
+            <if test="userId != null">
+                userId = #{userId},
+            </if>
+            <if test="temperature != null">
+                temperature=#{temperature},
+            </if>
+            <if test="humidity != null">
+                humidity = #{humidity},
+            </if>
+            <if test="illumination != null">
+                illumination = #{illumination},
+            </if>
+            <if test="dest1 != null">
+                dest1 = #{dest1},
+            </if>
+            <if test="dest2 != null">
+                dest2 = #{dest2},
+            </if>
+
+            <if test="PANID != null">
+                PANID = #{PANID},
+            </if>
+            
+        </set>
+        where homeId=#{homeId}
+    </update>
+    
+    <!-- 删除数据 -->
+    <delete id="deleteById">
+        delete from hometable where homeId=#{_parameter}
+    </delete>
+    
+    <!-- 通过用户id删除驴舍 -->
+    <delete id="deleteByUserId">
+        delete from hometable where userId=#{_parameter}
+    </delete>
+</mapper>
