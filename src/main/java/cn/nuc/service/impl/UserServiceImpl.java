@@ -22,9 +22,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	//登录验证用
 	public boolean validate(UserDto userDto) {
-		User user = new User();
-		BeanUtils.copyProperties(userDto, user);
-		List<User> list = userDao.select(user);
+//		User user = new User();
+//		BeanUtils.copyProperties(userDto, user);
+		List<User> list = userDao.validate(userDto);
 		if(list.size()==1){
 			return true;
 		}

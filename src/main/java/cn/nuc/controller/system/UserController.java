@@ -27,6 +27,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseObject addDonkey(@RequestBody UserDto dto){
 		System.out.println("loginUser");
+		System.out.println(dto.getUseraccount()+":"+dto.getPassword());
 		ResponseObject<String> responseObject=new ResponseObject<>();
 		if(userService.validate(dto)){
 			System.out.println("登录成功！");

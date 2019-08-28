@@ -2,6 +2,7 @@ package cn.nuc.dao;
 
 import java.util.List;
 
+import cn.nuc.dto.UserDto;
 import cn.nuc.entity.User;
 /**
  * 添加用户，增删改查，显示全部，统计数据
@@ -16,8 +17,11 @@ public interface UserDao {
      * @param user 查询条件
      * @return 用户列表
      */
-    List<User> select(User userDto);
-    
+    List<User> select(UserDto userDto);
+
+
+
+    List<User> validate(UserDto userDto);
     /**
      * 新增
      * @param user
