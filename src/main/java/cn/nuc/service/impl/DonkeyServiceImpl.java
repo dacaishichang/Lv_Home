@@ -3,6 +3,7 @@ package cn.nuc.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.nuc.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class DonkeyServiceImpl implements DonkeyService{
 		Donkey donkey = new Donkey();
 		BeanUtils.copyProperties(donkeyDto, donkey);
 		System.out.println(donkey);
+		if(donkey.getRFIDInfo()==null||donkey.getRFIDInfo().equals("")){
+			donkey.setRFIDInfo("None");
+		}
 		return donkeyDao.insert(donkey) == 1;
 	}
 
@@ -92,5 +96,14 @@ public class DonkeyServiceImpl implements DonkeyService{
 	@Override
 	public int selectCount() {
 		return donkeyDao.count();
+	}
+
+	@Override
+	public boolean validate(DonkeyDto donkeyDto) {
+		List<Donkey> list = donkeyDao.validate(donkeyDto);
+		if(list.size()==1){
+			return true;
+		}
+		return false;
 	}
 }

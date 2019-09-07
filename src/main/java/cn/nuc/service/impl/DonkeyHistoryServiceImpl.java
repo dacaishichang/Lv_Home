@@ -5,6 +5,7 @@ import cn.nuc.dao.DonkeyHistoryDao;
 import cn.nuc.dto.DonkeyDto;
 import cn.nuc.dto.DonkeyHistoryDto;
 import cn.nuc.dto.UserDto;
+import cn.nuc.entity.Donkey;
 import cn.nuc.entity.DonkeyHistory;
 import cn.nuc.entity.User;
 import cn.nuc.service.DonkeyHistoryService;
@@ -23,7 +24,13 @@ public class DonkeyHistoryServiceImpl  implements DonkeyHistoryService {
 
     @Override
     public boolean add(DonkeyHistoryDto donkeyHistoryDto) {
-        return false;
+        DonkeyHistory donkeyHistory = new DonkeyHistory();
+        BeanUtils.copyProperties(donkeyHistoryDto, donkeyHistory);
+        System.out.println(donkeyHistory);
+        if(donkeyHistory.getRFIDInfo()==null||donkeyHistory.getRFIDInfo().equals("")){
+            donkeyHistory.setRFIDInfo("None");
+        }
+        return donkeyHistoryDao.insert(donkeyHistory) == 1;
     }
 
     @Override
@@ -42,16 +49,14 @@ public class DonkeyHistoryServiceImpl  implements DonkeyHistoryService {
     }
 
     @Override
-    public List<DonkeyHistoryDto> getByDonkeyId(Long donkeyId) {
+    public List<DonkeyHistoryDto> getByDonkeyId(DonkeyHistoryDto donkeyHistoryDto) {
         List<DonkeyHistoryDto> result = new ArrayList<>();
-        DonkeyHistoryDto temp = new DonkeyHistoryDto();
-        temp.setDonkeyId(donkeyId);
-        List<DonkeyHistory> donkeyHistoryList = donkeyHistoryDao.select(temp);
+        List<DonkeyHistory> donkeyHistoryList = donkeyHistoryDao.select(donkeyHistoryDto);
         for (DonkeyHistory donkeyHistory : donkeyHistoryList) {
-            DonkeyHistoryDto donkeyHistoryDto = new DonkeyHistoryDto();
-            result.add(donkeyHistoryDto);
+            DonkeyHistoryDto donkeyHistoryDto_ = new DonkeyHistoryDto();
+            result.add(donkeyHistoryDto_);
             //字段赋值，常用于类赋值
-            BeanUtils.copyProperties(donkeyHistory, donkeyHistoryDto);
+            BeanUtils.copyProperties(donkeyHistory, donkeyHistoryDto_);
             donkeyHistoryDto.setpId(0);
         }
         return result;

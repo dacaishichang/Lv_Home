@@ -142,13 +142,13 @@
                     ,{field: 'temperature', title: '温度', sort: true, align:'center'}
                     ,{field: 'humidity', title: '湿度', align:'center'}
                     ,{field: 'illumination', title: '光照', align:'center'}
-                    ,{field: 'dest1', title: '地址1', sort: true, align:'center'}
-                    ,{field: 'dest2', title: '地址2', sort: true, align:'center'}
-                    ,{field: 'PANID', title: 'PANID', sort: true, align:'center'}
+
                     ,{title: '操作', toolbar: '#barhomeTable', align:'center'}
                 ]],
             });
-
+        // ,{field: 'dest1', title: '地址1', sort: true, align:'center'}
+        // ,{field: 'dest2', title: '地址2', sort: true, align:'center'}
+        // ,{field: 'PANID', title: 'PANID', sort: true, align:'center'}
             //添加和删除所有
             table.on('toolbar(homeTable)',function (obj) {
                 var checkStatus = table.checkStatus(obj.config.id);

@@ -42,7 +42,7 @@ public interface DonkeyHistoryService {
      * @param id
      * @return 用户对象
      */
-    List<DonkeyHistoryDto> getByDonkeyId(Long HomeId);
+    List<DonkeyHistoryDto> getByDonkeyId(DonkeyHistoryDto donkeyHistoryDto);
 
     /**
      * 通过获得所有Home

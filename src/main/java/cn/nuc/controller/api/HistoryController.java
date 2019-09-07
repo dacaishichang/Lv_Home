@@ -36,11 +36,14 @@ public class HistoryController {
     @ResponseBody
     @RequestMapping(value = "/listDonkeyHistory", method = RequestMethod.GET)
     private ResponseObject<List<DonkeyHistoryDto>> listDonkeyHistory(@RequestParam(value="page",defaultValue="1",required=true) int page
-            , @RequestParam(value="limit",defaultValue="100",required=true) int limit){
+            , @RequestParam(value="limit",defaultValue="100",required=true) int limit
+            , @RequestParam(value="donkeyId",defaultValue="-1",required=true) Long donkeyId){
         System.out.println("listDonkeyHistory");
         DonkeyHistoryDto donkeyHistoryDto = new DonkeyHistoryDto();
         donkeyHistoryDto.setLimit(limit);
         donkeyHistoryDto.setPage(page);
+        donkeyId=donkeyId==-1?null:donkeyId;
+        donkeyHistoryDto.setDonkeyId(donkeyId);
         ResponseObject<List<DonkeyHistoryDto>> responseObject=new ResponseObject<>();
         responseObject.setCode(0);
         responseObject.setMsg("");
@@ -55,12 +58,18 @@ public class HistoryController {
 
     @ResponseBody
     @RequestMapping(value = "/listDonkeyHistoryByDonkeyId/{donkeyId}", method = RequestMethod.GET)
-    private ResponseObject<List<DonkeyHistoryDto>> listDonkeyHistoryByDonkeyId(@PathVariable Long donkeyId){
+    private ResponseObject<List<DonkeyHistoryDto>> listDonkeyHistoryByDonkeyId(@RequestParam(value="page",defaultValue="1",required=true) int page
+            , @RequestParam(value="limit",defaultValue="100",required=true) int limit
+            , @RequestParam(value="donkeyId",defaultValue="1",required=true) long donkeyId){
         System.out.println("listDonkeyHistoryByDonkeyId");
+        DonkeyHistoryDto donkeyHistoryDto = new DonkeyHistoryDto();
+        donkeyHistoryDto.setLimit(limit);
+        donkeyHistoryDto.setPage(page);
+        donkeyHistoryDto.setDonkeyId(donkeyId);
         ResponseObject<List<DonkeyHistoryDto>> responseObject=new ResponseObject<>();
         responseObject.setCode(0);
         responseObject.setMsg("");
-        responseObject.setData(donkeyHistoryService.getByDonkeyId(donkeyId));
+        responseObject.setData(donkeyHistoryService.getByDonkeyId(donkeyHistoryDto));
         responseObject.setCount(donkeyHistoryService.selectCount());
         return responseObject;
     }

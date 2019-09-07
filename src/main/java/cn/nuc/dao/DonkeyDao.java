@@ -2,8 +2,11 @@ package cn.nuc.dao;
 
 import java.util.List;
 
+import cn.nuc.dto.DonkeyDto;
+import cn.nuc.dto.UserDto;
 import cn.nuc.entity.Donkey;
 import cn.nuc.entity.Home;
+import cn.nuc.entity.User;
 
 /**
  * 增删改查，统计数据，统计数据
@@ -18,7 +21,9 @@ public interface DonkeyDao {
      * @return 用户列表
      */
     List<Donkey> select(Donkey donkey);
-	
+
+
+	List<Donkey> validate(DonkeyDto donkeyDto);
 	/**
      * 新增
      * @param action

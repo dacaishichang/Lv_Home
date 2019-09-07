@@ -9,17 +9,40 @@
         <bind name="pageNum" value="(page-1)*limit"></bind>
         select donkeyId, RFIDInfo, homeId,gender,size from donkeytable t
         <where>
+              1=1
             <if test="homeId != null">
                 and t.homeId = #{homeId}
             </if>
             <if test="size != null">
                 and t.size=#{size}
             </if>
+            <if test="RFIDInfo != null">
+                and t.RFIDInfo = #{RFIDInfo}
+            </if>
             <if test="gender != gender">
                 and t.gender = #{gender}
             </if>
         </where>
         order by homeId limit #{pageNum},#{limit}
+    </select>
+
+    <select id="validate" resultType="Donkey">
+        select donkeyId, RFIDInfo, homeId,gender,size from donkeytable t
+        <where>
+            1=1
+            <if test="homeId != null">
+                and t.homeId = #{homeId}
+            </if>
+            <if test="size != null">
+                and t.size=#{size}
+            </if>
+            <if test="gender != null">
+                and t.gender = #{gender}
+            </if>
+            <if test="RFIDInfo != null">
+                and t.RFIDInfo = #{RFIDInfo}
+            </if>
+        </where>
     </select>
 
     <!--统计-->
@@ -41,8 +64,8 @@
 
     <!-- 插入操作 -->
     <insert id="insert">
-        insert into donkeytable(homeId,gender,size)
-        values(#{homeId},#{gender},#{size})
+        insert into donkeytable(homeId,RFIDInfo,gender,size)
+        values(#{homeId},#{RFIDInfo},#{gender},#{size})
     </insert>
 
     <!-- 通过Id来寻找特定单个目标 -->

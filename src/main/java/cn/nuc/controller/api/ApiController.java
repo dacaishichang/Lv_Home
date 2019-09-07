@@ -249,6 +249,7 @@ public class ApiController {
 		responseObject.setMsg("");
 		responseObject.setData(donkeyService.getList(dto));
 		responseObject.setCount(donkeyService.selectCount());
+		responseObject.setSize(responseObject.getData().size());
 		return responseObject;
 	}
 

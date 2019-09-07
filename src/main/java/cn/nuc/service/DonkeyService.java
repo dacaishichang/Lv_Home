@@ -50,4 +50,10 @@ public interface DonkeyService {
 
 
 	int selectCount();
+
+	/**
+	 *验证对象是否存在
+	 */
+
+	boolean validate(DonkeyDto donkeyDto);
 }

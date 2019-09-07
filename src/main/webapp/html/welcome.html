@@ -28,32 +28,35 @@
                                     <li class="layui-col-xs3">
                                         <!--<a href="" target="_blank">-->
                                             <i class="layui-icon">&#xe660;</i>
-                                            <cite>陈青青</cite>
-                                            <p><span>硬件:包括ZigBee与PC端的通信</span></p>
+                                            <!--<cite></cite>-->
+                                                陈青青
+                                            <p><span>硬件:包括ZigBee、RFID与服务器的通信(WIFI)</span></p>
                                         </a>
                                     </li>
                                     <li class="layui-col-xs3">
                                         <!--<a href="" target="_blank">-->
                                             <i class="layui-icon">&#xe678;</i>
-                                            <cite>李书豪</cite>
+                                            <!--<cite></cite>-->
+                                                李书豪
                                             <p><span>Android端:包括移动端与PC端的交互</span></p>
                                         </a>
                                     </li>
                                     <li class="layui-col-xs3">
                                         <!--<a href="" target="_blank">-->
                                             <i class="layui-icon">&#xe64b;</i>
-                                            <cite>黄华飞</cite>
+                                            <!--<cite></cite>-->
+                                                黄华飞
                                             <p><span>服务器:服务器前后端搭建</span></p>
                                         </a>
                                     </li>
                                     <li class="layui-col-xs3">
                                         <!--<a href="" target="_blank">-->
                                             <i class="layui-icon">&#xe63c;</i>
-                                            <cite>赵海霞</cite>
-                                            <p><span>RFID通信和文档撰写</span></p>
+                                            <!--<cite></cite>-->
+                                                赵海霞
+                                            <p><span>ZigBee结点烧写和文档撰写</span></p>
                                         </a>
                                     </li>
-
 
                                 </ul>
                                 <ul class="layui-row layui-col-space10">
@@ -121,42 +124,46 @@
             <fieldset class="layui-elem-field" style="padding: 5px;">
 
                 <!--<legend>信息统计</legend>-->
-                <blockquote class="layui-elem-quote font16">信息统计</blockquote>
+                <blockquote class="layui-elem-quote font16">项目参数</blockquote>
                 <div class="">
                     <table class="layui-table">
                         <thead>
                         <tr>
-                            <th colspan="2" scope="col">服务器信息</th>
+                            <th colspan="2" scope="col">Web端信息</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
+                            <th width="30%">操作系统</th>
+                            <td>Windows10专业版</td>
+                        </tr>
+                        <tr>
                             <th width="30%">服务器计算机名</th>
-                            <td><span id="lbServerName">http://127.0.0.1/</span></td>
+                            <td>http://192.168.137.1/</td>
                         </tr>
                         <tr>
                             <td>服务器IP地址</td>
-                            <td>192.168.1.1</td>
+                            <td>192.168.137.1</td>
                         </tr>
                         <tr>
-                            <td>服务器域名</td>
-                            <td>github.com</td>
+                            <td>服务器端口</td>
+                            <td>8080</td>
                         </tr>
                         <tr>
-                            <td>服务器端口 </td>
-                            <td>80</td>
+                            <td>数据接口</td>
+                            <td>api&history</td>
                         </tr>
                         <tr>
-                            <td>本文件所在文件夹 </td>
-                            <td>D:\Web\WeAdmin\</td>
+                            <td>第三方UI框架</td>
+                            <td>layUI</td>
                         </tr>
                         <tr>
-                            <td>WeAdmin时间 </td>
-                            <td id="firstTime">2018-01-01 13:14:00</td>
+                            <td>后端框架</td>
+                            <td id="firstTime">SSM</td>
                         </tr>
                         <tr>
-                            <td>上次更新时间 </td>
-                            <td id="lastTime">7210分钟</td>
+                            <td>数据库版本</td>
+                            <td id="lastTime">MySQL 5.7</td>
                         </tr>
                         </tbody>
                     </table>
@@ -174,11 +181,12 @@
                         <div class="layui-timeline-content layui-text">
                             <div class="layui-timeline-title">
                                 <h3>数据管理</h3>
-                                <span class="layui-badge-rim">2019-06-18</span>
+                                <span class="layui-badge-rim">核心功能</span>
                             </div>
                             <ul>
-                                <li>更新layui基础版本为V2.5.4</li>
-                                <li>左侧菜单更新为动态获取方式(本地JSON模拟)</li>
+                                <li>温度的历史测量数据</li>
+                                <li>湿度的历史测量数据</li>
+                                <li>光照的历史测量数据</li>
                             </ul>
                         </div>
                     </li>
@@ -187,11 +195,12 @@
                         <div class="layui-timeline-content layui-text">
                             <div class="layui-timeline-title">
                                 <h3>实体管理</h3>
-                                <span class="layui-badge-rim">2019-01-15</span>
+                                <span class="layui-badge-rim">基本功能</span>
                             </div>
                             <ul>
-                                <li>更新layui基础版本为V2.4.5</li>
-                                <li>更新字体图标的引入方式为iconfont(未修改完全，按照示例即可)</li>
+                                <li>用户实体管理</li>
+                                <li>驴舍实体管理</li>
+                                <li>驴个体实体管理</li>
                             </ul>
                         </div>
                     </li>
@@ -200,10 +209,10 @@
                         <div class="layui-timeline-content layui-text">
                             <div class="layui-timeline-title">
                                 <h3>驴个体</h3>
-                                <span class="layui-badge-rim">2018-04-03</span>
+                                <span class="layui-badge-rim">打卡记录</span>
                             </div>
                             <ul>
-                                <li>更新layui基础版本为V2.2.6</li>
+                                <li>每个驴的打卡记录</li>
                             </ul>
                         </div>
                     </li>
@@ -211,9 +220,12 @@
                         <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
                         <div class="layui-timeline-content layui-text">
                             <div class="layui-timeline-title">
-                                <h3>项目完成</h3>
-                                <span class="layui-badge-rim">2018-01-01</span>
+                                <h3>界面导航</h3>
+                                <span class="layui-badge-rim">欢迎界面</span>
                             </div>
+                            <ul>
+                                <li>简单介绍&欢迎界面</li>
+                            </ul>
                         </div>
                     </li>
                 </ul>
@@ -254,10 +266,7 @@
             ,autoplay:true
         });
 
-        $(function(){
-            setTimeAgo(2018,0,1,13,14,0,'#firstTime');
-            setTimeAgo(2019,5,20,16,0,0,'#lastTime');
-        });
+
         function setTimeAgo(y, M, d, H, m, s,id){
             var str = util.timeAgo(new Date(y, M||0, d||1, H||0, m||0, s||0));
             $(id).html(str);
