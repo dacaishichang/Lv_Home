@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.DonkeyDao">
+
+	<!-- 列出所有的列表 -->
+	<select id="select" resultType="Donkey">
+		select donkeyId, RFIDInfo, homeId,gender,size from donkeytable t
+		<where>
+			1=1
+			<if test="RFIDInfo != null">
+				and t.RFIDInfo = #{RFIDInfo}
+			</if>
+			<if test="homeId != null">
+				and t.homeId = #{homeId}
+			</if>
+			<if test="size != null">
+				and t.size=#{size}
+			</if>
+			<if test="gender != gender">
+				and t.gender = #{gender}
+			</if>
+		</where>
+		order by homeId
+	</select>
+
+	<!-- 插入操作 -->
+	<insert id="insert">
+        insert into donkeytable(homeId,RFIDInfo,gender,size)
+        values(#{homeId},#{RFIDInfo},#{gender},#{size})
+    </insert>
+
+	<!-- 通过Id来寻找特定单个目标 -->
+	<select id="selectById" resultType="Donkey">
+        select donkeyId,RFIDInfo,homeId,gender,size from donkeytable where donkeyId = #{_parameter}
+    </select>
+
+	<!-- 更新数据 -->
+	<update id="update">
+		update donkeytable
+		<set>
+			<if test="homeId != null">
+				homeId = #{homeId},
+			</if>
+			<if test="RFIDInfo != null">
+				RFIDInfo=#{RFIDInfo},
+			</if>
+			<if test="gender != null">
+				gender=#{gender},
+			</if>
+			<if test="size != null">
+				size = #{size},
+			</if>
+
+		</set>
+		where donkeyId=#{donkeyId}
+	</update>
+
+	<!-- 删除数据 -->
+	<delete id="deleteById">
+        delete from donkeytable where donkeyId=#{_parameter}
+    </delete>
+
+	<!-- 通过驴舍id删除驴 -->
+	<delete id="deleteByHomeId">
+        delete from donkeyId where homeId=#{_parameter}
+    </delete>
+</mapper>
+

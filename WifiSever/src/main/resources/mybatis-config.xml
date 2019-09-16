@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="entity"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/lv_home?useSSL=false"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+
+        <package name="dao"></package>
+        <!--<mapper resource="mappers/User.xml"/>-->
+
+
+    </mappers>
+
+    <!-- 配置全局属性 -->
+    <!--<settings>-->
+    <!--&lt;!&ndash; 使用jdbc的getGeneratedKeys获取数据库自增主键值 &ndash;&gt;-->
+    <!--<setting name="useGeneratedKeys" value="true" />-->
+
+    <!--&lt;!&ndash; 使用列别名替换列名 默认:true &ndash;&gt;-->
+    <!--<setting name="useColumnLabel" value="true" />-->
+
+    <!--&lt;!&ndash; 开启驼峰命名转换:Table{create_time} -> Entity{createTime} &ndash;&gt;-->
+    <!--<setting name="mapUnderscoreToCamelCase" value="true" />-->
+    <!--</settings>-->
+
+</configuration>

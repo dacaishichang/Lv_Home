@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.DonkeyHistoryDao">
+	<!-- 列出所有的列表 -->
+	<select id="select" resultType="DonkeyHistory">
+		select donkeytimeId,donkeyId, RFIDInfo, size, time from donkeyhistory t
+		<where>
+			1=1
+			<if test="donkeyId != null">
+				and t.donkeyId = #{donkeyId}
+			</if>
+			<if test="RFIDInfo != null">
+				and t.RFIDInfo=#{RFIDInfo}
+			</if>
+			<if test="size != null">
+				and t.size = #{size}
+			</if>
+		</where>
+		order by homeId
+	</select>
+
+	<!-- 插入操作 -->
+	<insert id="insert">
+        insert into donkeyhistory (donkeyId, RFIDInfo, size, time)
+        values(#{donkeyId},#{RFIDInfo},#{size},#{time})
+    </insert>
+
+	<!-- 通过Id来寻找特定单个目标 -->
+	<select id="selectByDonkeyId" resultType="DonkeyHistory">
+        select donkeytimeId,donkeyId, RFIDInfo, size, time from donkeyhistory where donkeyId = #{_parameter}
+    </select>
+
+	<!-- 更新数据 -->
+	<update id="update">
+		update donkeyhistory
+		<set>
+			<if test="donkeyId != null">
+				donkeyId = #{donkeyId},
+			</if>
+			<if test="RFIDInfo != null">
+				RFIDInfo=#{RFIDInfo},
+			</if>
+			<if test="size != null">
+				size = #{size},
+			</if>
+		</set>
+		where homeId=#{homeId}
+	</update>
+
+	<!-- 删除数据 -->
+	<delete id="deleteById">
+        delete from donkeyhistory where donkeytimeId=#{_parameter}
+    </delete>
+
+	<!--&lt;!&ndash; 通过用户id删除驴舍 &ndash;&gt;-->
+	<!--<delete id="deleteById">-->
+        <!--delete from donkeyhistory where donkeytimeId=#{_parameter}-->
+    <!--</delete>-->
+</mapper>
+
